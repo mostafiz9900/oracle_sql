@@ -1,0 +1,12 @@
+ create table test(
+	id number(2) primary key,
+	name varchar2(15) not null);
+create sequence test_seq start with 50 increment by 5 maxvalue 100;
+insert into test(id,name) values(test_seq.nextval,'Mostafuz');
+insert into test(id,name) values(test_seq.nextval,'Minhan');
+
+ update test set name='Mostafizur' where id=50;
+
+create table dep(
+	id number(2) primary key,
+	name varchar2(15) not null);

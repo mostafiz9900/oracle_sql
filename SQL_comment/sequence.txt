@@ -1,0 +1,77 @@
+ create sequence dept_deptid_seq increment by 10 start with 120 maxvalue 9999 nocache nocycle;
+
+insert into test(id,name) values(dept_deptid_seq.nextval, 'Rahim');
+alter table test modify(id number(4));
+describe test;
+ select * from test;
+
+create sequence tes_seq start with 50 increment by 5 maxvalue 80;
+ create table test2(id number(2), name varchar2(30));
+insert into test2(id,name) values(tes_seq.nextval,'Mostafizur');
+insert into test2(id,name) values(tes_seq.nextval,'Sofiqul');
+insert into test2(id,name) values(tes_seq.nextval,'Mortuza');
+insert into test2(id,name) values(tes_seq.nextval,'Rojina');
+
+========show table========
+select table_name from user_tables;
+
+=====show view==========
+select view_name from user_views;
+
+==========show sequence========
+select sequence_name from user_sequences;
+
+======other user but show other table===========
+select * from hr.employees;
+==============update sequence============
+alter sequence tes_seq increment by 90 maxvalue 9999;
+insert into test2(id,name) values(tes_seq.nextval,'Minhan');
+
+create sequence tes_seq start with 50 increment by 5 maxvalue 80;
+
+
+create table dep(id number(3) primary key, name varchar2(2) not null);
+
+create table emp(
+	em_id number(3) primary key,
+ 	name varchar2(20) not null, 
+	salary number(7) check(salary < 50000),
+ 	phone varchar2(15) unique, 
+	id number(3), constraint dep_emp_fk foreign key (id) REFERENCES dep(id));
+
+alter table dep modify(name varchar2(20));
+
+create sequence dep_seq start with 50 increment by 10 maxvalue 100;
+insert into dep(id, name) values(dep_seq.nextval,'a');
+insert into dep(id, name) values(dep_seq.nextval,'b');
+
+insert into dep(id, name) values(dep_seq.nextval,'c');
+
+insert into dep(id, name) values(dep_seq.nextval,'d');
+
+
+create sequence emp_seq start with 1 increment by 5 maxvalue 200;
+insert into emp(em_id, name, salary, phone, id) values(emp_seq.nextval,'Mostafiz', 40000, 01730-959439,50);
+insert into emp(em_id, name, salary, phone, id) values(emp_seq.nextval,'Sofiqul', 42000, 01748-567000,60);
+insert into emp(em_id, name, salary, phone, id) values(emp_seq.nextval,'Ajat', 42000, 01748-567111,70);
+insert into emp(em_id, name, salary, phone, id) values(emp_seq.nextval,'Ajat', 42000, '01748-000111',70);
+
+
+
+create sequence emp3_seq start with 0 increment by 5 maxvalue 200 minvalue 0;
+insert into emp(em_id, name, salary, phone, id) values(emp2_seq.nextval,'Ajat', 42000, 01748-567112,70);
+insert into emp(em_id, name, salary, phone, id) values(emp2_seq.nextval,'Ajat', 42000, 01748-567113,70);
+insert into emp(em_id, name, salary, phone, id) values(emp2_seq.nextval,'Ajat', 42000, 01748-577113,70);
+
+
+===========update row================
+ update dep set name='dfdfdfdsfda' where id=50;
+update dep set name='Russia' where id=80;
+
+
+
+
+
+
+
+

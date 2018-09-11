@@ -1,0 +1,20 @@
+create table teacher(
+	t_id number(2) primary key,
+	t_name varchar2(30) not null,
+	salary number(7,2) check(salary >5000),
+	phone number(11) unique,
+	joining_date date default sysdate);
+insert into teacher(t_id, t_name, salary, phone) values(01,'Mostafizur', 30000, 01730959439);
+insert into teacher(t_id, t_name, salary, phone) values(02,'Sofiqul', 32000, 01730959400);
+
+
+
+create table student(id number(2) primary key,
+	name varchar2(30) not null,
+	education varchar2(30),
+	district varchar2(50),
+	t_id number(2), constraint stu_tec_fk foreign key (t_id) references teacher(t_id));
+insert into student(id, name, education, district, t_id) values(11,'Momin' , 'HSC','Tangail',01);
+insert into student(id, name, education, district, t_id) values(12,'Al-amin' , 'HSC','Tangail',02);
+
+ create or replace view tec_stu AS select s.name, s.id , t.t_id from teacher t ,student s where t.t_id=s.t_id;

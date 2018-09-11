@@ -1,0 +1,52 @@
+ connect sys as sysdba
+create user xyz identified by xyz;
+grant create session to xyz;
+
+=====power / parmition======
+great create table to xyz;
+
+
+create table test(id number(3), name varchar2(20));
+=========error table==============
+alter user xyz quota 50m on system;
+=======data insert=======
+insert into test(id, name) values(01, 'Mostafizur');
+===========update===========
+update test set name='Sofiqul' where id=01;
+select * from test;
+==============new============
+create user xyz2 identified by xyz2;
+grant create session to xyz2;
+create table test2(id number(3), name varchar2(20));
+insert into test2(id, name) values(01, 'Mostafizur');
+select * from test;
+=========user <--roul create <- privilege=============
+connect again as sysdba
+* creat a role like manager
+create role manager;
+* give privileges / permission to role manager
+grant crest session, create  table to manager;
+
+============change password=========
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect
+Enter user-name: xyz3
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL> connect sys as sysdba;
+Enter password:
+Connected.
+SQL> alter user xyz3 identified by xyz3 account unlock;
+
+User altered.
+
+SQL> connect
+Enter user-name: xyz3
+Enter password:
+Connected.
+SQL>
+* 

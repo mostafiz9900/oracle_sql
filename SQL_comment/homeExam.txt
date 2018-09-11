@@ -1,0 +1,28 @@
+
+2. 
+	a) create table department(
+		dep_id number(3) primary key,
+		dep_name varchar2(20) not null);
+
+	b) create table employee(
+		emp_id number(3) primary key,
+		emp_name varchar2(25),
+		salary number(5) check(salary>20000),
+		phone varchar2(15) unique,
+		join_date date default sysdate,
+		country varchar2(20) default 'Bangladesh');
+	c) select table_name from user_tables;
+	   describe department;
+	   describe employee;
+	alter table employee add (dep_id number(3), constraint emp_dep_fk foreign key (dep_id) references department(dep_id));
+3. 	
+	a) create sequence dep_seq start with 10 increment by 5 maxvalue 100;
+	   create sequence emp_seq start with 20 increment by 10 maxvalue 200;
+	select sequence_name from user_sequences;
+4. 	
+	select index_name from user_indexes;
+	create index dep_name_ind on 
+
+
+
+

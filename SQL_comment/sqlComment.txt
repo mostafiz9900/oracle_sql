@@ -1,0 +1,109 @@
+create table country (id number(2) primary key, namr varchar2(30) not null);
+insert into country(id,name) values(01,'Bangladesh');
+insert into country(id,name) values(02,'Bangladesh');
+
+create table division (division_id number(2) primary key, division_name varchar2(30) not null, id number(2), constraint division_country_fk foreign key(id) references country(id));
+insert into division (division_id,division_name ,id) values(11, 'Dhaka', 01);
+insert into division (division_id,division_name ) values(12, 'Rangpur');
+
+
+select c.name,  d.division_name, d.division_id from country c ,division d;
+select c.name,  d.division_name, d.division_id from country c ,division d where c.id=d.id;
+
+
+create table district(dis_id number(2) primary key, dis_name varchar2(20) not null, division_id number(2), constraint dis_div_fk foreign key(division_id) references division(division_id));
+insert into district(dis_id, dis_name, division_id) values(22,'Tangail',11);
+insert into district(dis_id, dis_name, division_id) values(23,'Gagipur',11);
+insert into district(dis_id, dis_name, division_id) values(24,'Gopalgonj',12);
+
+create table upz(upz_id number(2) primary key, upz_name varchar2(20) not null, dis_id number(2), constraint upz_dis_fk foreign key (dis_id) references district(dis_id));
+insert into upz(upz_id, upz_name, dis_id) values(33, 'Gopalpur',22);
+insert into upz(upz_id, upz_name, dis_id) values(34, 'Mirzapur',22);
+insert into upz(upz_id, upz_name, dis_id) values(35, 'Modupure',23);
+insert into upz(upz_id, upz_name, dis_id) values(36, 'Nagorpure',24);
+
+select d.dis_name , u.upz_id, u.upz_name from district d , upz u where d.dis_id=u.upz_id;
+
+==========index===========
+create index ind_lastName on employees(last_name);
+select index_name from user_indexes;
+drop index employees.ind_lastName;
+drop index ind_lastName;
+======synonyms============
+create synonym sys_name for employees;
+
+select synonym_name from user_synonyms;
+select * from sys_name;
+drop synonym sys_name;
+
+
+==========exam============
+1. create user eid identified by eid;
+2. grant dba to eid;
+
+a) create table department4(
+	dep_id number(3) primary key,
+	 department_name varchar2(20) not null);
+
+
+b) create table employee(
+	emp_id number(3) primary key,
+	emp_name varchar2(20) unique,
+	salary number(5) check(salary>10000),
+	join_date date default sysdate,
+	country varchar2(20) default 'BD',
+	dep_id number(3) ,constraint emp_dep_fk foreign key (dep_id) references department(dep_id));
+c)
+describe department;
+
+describe employee;
+
+3. 
+a) create sequence dep_seq start with 10 increment by 10;
+b) create sequence emp_seq start with 5 increment by 5;
+c) select sequence_name from user_sequences;
+
+4. department table:
+	a) select index_name from user_indexes; 
+	b) create index dep_name_ind on department(department_name);
+	c) select index_name from user_indexes;
+	d) 	insert into department(dep_id, department_name) values(dep_seq.nextval, 'ADMIN');
+		insert into department(dep_id, department_name) values(dep_seq.nextval, 'SOFTWARE');
+		insert into department(dep_id, department_name) values(dep_seq.nextval, 'MARKETING');
+	e) create view dep_view as select dep_id, department_name from department; 
+	f) select view_name from user_views;
+	g) create synonym dep_syn for department;
+	h)
+5. Employee table:
+	a) select index_name from user_indexes;
+	b) create index sala_name_ind on employee(salary);
+	c) select sequence_name from user_sequences;
+	d) 	insert into employee(emp_id,emp_name,salary,dep_id) values(emp_seq.nextval,'Mostafiz', 70000, 10);
+		insert into employee(emp_id,emp_name,salary,dep_id) values(emp_seq.nextval,'Sofiqul', 80000, 10);
+
+		insert into employee(emp_id,emp_name,salary,dep_id) values(emp_seq.nextval,'Mortuza', 90000, 20);
+
+		insert into employee(emp_id,emp_name,salary,dep_id) values(emp_seq.nextval,'Rojina', 75000, 30);
+		insert into employee(emp_id,emp_name,salary,dep_id) values(emp_seq.nextval,'Ajat', 85000, 30);
+
+	e) create view emp_view as select  emp_id,emp_name,salary, country, dep_id from employee;
+	f) select view_name from user_views;
+	g) create synonym emp_syn for employee;
+	h) select * from  employee;
+	select * from  emp_view;
+	select * from  emp_syn;
+6. 
+	a) update department set department_name='SALES' where dep_id=30;
+	b) alter table department add  email varchar2(25) unique;
+
+
+
+
+
+
+
+
+
+
+
+

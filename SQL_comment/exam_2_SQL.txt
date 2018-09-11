@@ -1,0 +1,85 @@
+==========connect==============
+connect sys as sysdba
+============create user1===========
+create user user1 identified by user1;
+connect user1
+
+connect sys as sysdba
+grant create session to user1; 
+connect user1
+create table teacher(id number(2), t_name varchar2(20));
+
+connect sys as sysdba
+grant create table to user1;
+connect user1
+insert into teacher(id,t_name) values(01,'Mostafiz');
+
+
+connect sys as sysdba
+alter user user1 quota 500m on system;
+connect user1
+insert into teacher(id, t_name) values(01, 'Mostafiz');
+
+============create user2===========
+connect sys as sysdba
+create user user2 identified by user2;
+ create role manager2;
+grant create session ,create table to manager2;
+
+
+======================**************=========================
+connect sys as sysdba
+
+create user oracle1 identified by oracle1; 
+create user oracle2 identified by oracle2;
+create role admin ;
+create role admin2
+grant create session, create table to admin;
+grant create session , create table to admin2;
+grant admin to oracle1;
+grant admin to oracle2;
+
+grant unlimited tablespace to oracle1;
+grant unlimited tablespace to oracle2;
+grant select on hr.departments to oracle1;
+grant select on hr.employees to oracle2;
+grant select on hr.departments to oracle2;
+grant select on hr.departments to oracle1, oracle2;
+
+
+alter user oracle1 quoda 100m  on system;
+alter user oracle2 quoda 100m  on system;
+
+connect oracle1
+create table department as select * from hr.departments;
+describe department;
+select * from department
+create table employee as select * from hr.employees;
+create table employee2 as select * from hr.departments;
+create table employee2 as select * from hr.employees,hr.departments;
+describe employee;
+select table_name from user_tables;
+select * from employee;
+============other user =================
+grant select on xyz.test to xyz2 with grant option;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

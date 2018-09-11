@@ -1,0 +1,31 @@
+SQL> create table department(
+  2  dep_id number(3) primary key,
+  3  \
+  4  
+SQL> 
+SQL> create table department(
+  2  dep_id number(3) primary key,
+  3   department_name varchar2(20) not null);
+create table department(
+*
+ERROR at line 1:
+ORA-03113: end-of-file on communication channel 
+Process ID: 4032 
+Session ID: 8 Serial number: 985 
+
+
+SQL> create table department2(
+  2  dep_id number(3) primary key,
+  3   department_name varchar2(20) not null);
+ERROR:
+ORA-03114: not connected to ORACLE 
+
+
+SQL> connect
+Enter user-name: system
+Connected.
+SQL> connect
+Enter user-name: eid
+Connected.
+SQL> spool D:\sql\test_commont.tex
+

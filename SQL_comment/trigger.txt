@@ -1,0 +1,36 @@
+create table employees as select * from hr.employees;
+delete from employees;
+describe employees;
+create table backup_employees as select * from employees;
+insert into employees select * from hr.employees where employee_id=110;
+select * from backup_employees;
+
+
+
+
+
+
+create or replace trigger emp_after_insert  after insert on employees for each row 
+DECLARE 
+BEGIN
+     insert into backup_employees   values   (:new.EMPLOYEE_ID,  :new.FIRST_NAME, :new.LAST_NAME, :new.EMAIL, :new.PHONE_NUMBER, :new.HIRE_DATE, :new.JOB_ID, :new.SALARY, :new.COMMISSION_PCT,
+:new.MANAGER_ID, :new.DEPARTMENT_ID);
+
+DBMS_OUTPUT.PUT_LINE('record successfully inserted into backup_employees');
+
+END;
+===============chack triger==================
+select trigger_name from user_triggers;
+
+drop trigger emp_after_insert;
+
+==========update==============
+create or replace trigger emp_after_update  after update on employees for each row 
+DECLARE 
+BEGIN
+     update  backup_employees   set    last_name= :new.last_name where employee_id=  :old.employee_id;
+
+DBMS_OUTPUT.PUT_LINE('record successfully inserted into backup_employees');
+END;
+===========comment update==============
+update employees set last_name='jjjjjjjjjjj' where  employee_id=110;

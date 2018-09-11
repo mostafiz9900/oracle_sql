@@ -1,0 +1,20 @@
+==========table space========
+grant unlimited tablespace to user name;
+
+=========connect sys ======
+connect sys as sysdba;
+=========create user===========
+create user mkt2 identified by mkt9900;
+note:::::connect sys as sysdba;
+grant create session to mkt2;
+
+create table test(id number(3), name varchar2(20));
+
+insert into test3(id,name) values(22,'Joy');
+=================display===============
+select * from role_sys_privs;
+where role='MANAGER';
+
+============revoke===========
+revoke dba from user name
+revoke create table from userName

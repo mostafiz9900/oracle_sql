@@ -1,0 +1,65 @@
+Enter user-name: system
+Enter password:
+Connected.
+SQL> connect sys as sysdba;
+Enter password:
+Connected.
+SQL> alter user eid2 identified by eid account unlock;
+
+User altered.
+
+SQL> connect
+Enter user-name: eid2
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> connect
+Enter user-name: eid2
+Enter password:
+Connected.
+SQL>
+
+create table department(
+	dep_id number(4) primary key,
+	name varchar2(30) not null);
+create table employee(
+	emp_id number(4) primary key,
+	emp_name varchar2(20),
+	phone varchar2(15) unique,
+	salary number(7) check (salary>20000),
+	join_date date default sysdate,
+	dep_id number(4), constraint emp_dep_fk foreign key (dep_id) references department(dep_id));
+alter table employee add country varchar2(10) default 'Bangladesh';
+
+describe department;
+describe employee;
+
+create sequence dep_seq start with 10 increment by 5 maxvalue 100;
+create sequence emp_seq start with 50 increment by 10 maxvalue 500;
+select sequence_name from user_sequences;
+
+4. Department table
+	select index_name from user_indexes;
+	create index dep_ind on department(name);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

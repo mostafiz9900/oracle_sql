@@ -1,0 +1,33 @@
+==================connect sys as sysdba===========
+ connect sys as sysdba
+create user ora1 identified by ora1;
+create user ora2 identified by ora2;
+create role ora1_mgt;
+create role ora2_mgt;
+grant create session, create table to ora1_mgt,ora2_mgt;
+grant ora1_mgt to ora1;
+grant ora2_mgt to ora2;
+grant unlimited tablespace to ora1,ora2;
+
+***************************
+=======connect ora1============
+connect
+
+==========connect sys copy data grant=================
+grant select on hr.employees to ora1,ora2;
+grant select on hr.departments to ora1,ora2;
+grant select on hr.locations to ora1,ora2;
+
+============create table copy ora1 =================
+connect ora1
+create table emp as select * from hr.employees; 
+create table dep as select * from hr.departments; 
+============create table copy  ora2=================
+connect ora2
+create table emp as select * from hr.employees; 
+create table dep as select * from hr.departments; 
+create table loc as select * from hr.locations; 
+======== connect sys=========
+connect sys as sysdba
+grant select, insert, update(department_id) on ora2.emp to ora1;
+

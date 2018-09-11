@@ -1,0 +1,94 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Aug 9 08:33:50 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> connect
+Enter user-name: mkt
+Enter password:
+Connected.
+SQL> show user
+USER is "MKT"
+SQL> select table_name from user_tables;
+
+TABLE_NAME
+------------------------------
+STUDENT
+TEST
+TEST100
+TEST1
+TEST2
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(4)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CREATE_DATE                                        DATE
+
+SQL> alter table test add (dep_id number(2), dep_name varchar2(20));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(4)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CREATE_DATE                                        DATE
+ DEP_ID                                             NUMBER(2)
+ DEP_NAME                                           VARCHAR2(20)
+
+SQL> alter table test modify(dep_name varchar2(50), dep_id varchar2(12));
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(4)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CREATE_DATE                                        DATE
+ DEP_ID                                             VARCHAR2(12)
+ DEP_NAME                                           VARCHAR2(50)
+
+SQL> alter table test drop column dep_name;
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(4)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CREATE_DATE                                        DATE
+ DEP_ID                                             VARCHAR2(12)
+
+SQL> alter table test rename column dep_id to gmail;
+
+Table altered.
+
+SQL> describe test;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(4)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CREATE_DATE                                        DATE
+ GMAIL                                              VARCHAR2(12)
+
+SQL> show autocommit;
+autocommit OFF
+SQL> set autocommit on;
+SQL> show autocommit;
+autocommit IMMEDIATE
+SQL>
+
+
+
+
+
+
